@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -6,7 +7,7 @@ from wtforms.validators import DataRequired
 from forms.task_form import TaskForm 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///tasks.db')
 app.config['SECRET_KEY'] = 'secret'
 db = SQLAlchemy(app)
 
@@ -46,6 +47,3 @@ def complete(id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-

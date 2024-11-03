@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Task Manager</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.content.label }} {{ form.content }}
+    {{ form.submit }}
+</form>
+<ul>
+    {% for task in tasks %}
+    <li>
+        {% if task.completed %}
+        <del>{{ task.content }}</del>
+        {% else %}
+        {{ task.content }}
+        {% endif %}
+        <a href="{{ url_for('complete', id=task.id) }}">Complete</a>
+        <a href="{{ url_for('delete', id=task.id) }}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

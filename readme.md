@@ -14,3 +14,6 @@ A simple web application to manage tasks, developed with Flask and SQLAlchemy.
 - SQLAlchemy
 - Flask-WTF
 - HTML/CSS
+
+## Web Site
+https://flask-taskmanager-fin9.onrender.com/

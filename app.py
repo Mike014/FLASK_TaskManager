@@ -9,6 +9,7 @@ from forms.task_form import TaskForm
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///tasks.db')
 app.config['SECRET_KEY'] = 'secret'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Task(db.Model):
@@ -46,4 +47,6 @@ def complete(id):
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
